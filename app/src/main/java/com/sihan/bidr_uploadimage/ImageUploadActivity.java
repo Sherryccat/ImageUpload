@@ -50,8 +50,8 @@ public class ImageUploadActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
-        if(resultCode == result_uploadImage && resultCode == RESULT_OK && data != null){
+
+        if(requestCode == result_uploadImage && resultCode == RESULT_OK && data != null){
             Uri selectedImage = data.getData();
             itemImage.setImageURI(selectedImage);
         }

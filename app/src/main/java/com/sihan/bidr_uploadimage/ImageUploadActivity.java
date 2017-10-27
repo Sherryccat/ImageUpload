@@ -100,7 +100,7 @@ public class ImageUploadActivity extends AppCompatActivity implements View.OnCli
                 HttpURLConnection httpPost = new HttpURLConnection(new URL(SERVER_ITEM_ADDRESS)) {
                     @Override
                     public void disconnect() {
-
+ 
                     }
 
                     @Override

@@ -14,8 +14,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -91,30 +95,31 @@ public class ImageUploadActivity extends AppCompatActivity implements View.OnCli
             dataToSend.put("image",encodedImage);
             dataToSend.put("name",name);
 
-            //TODO create a variable to hold timeOutParameter
+            //create a variable to hold timeOutParameter
+            int timeOut=2000; //in milliseconds
 
-
-            //TODO add url
-
+            //TODO Check this:
+            HttpURLConnection httpPost = null;
             try {
-                HttpURLConnection httpPost = new HttpURLConnection(new URL(SERVER_ITEM_ADDRESS)) {
-                    @Override
-                    public void disconnect() {
+                URL url = new URL(SERVER_ITEM_ADDRESS);
+                httpPost = (HttpURLConnection) url.openConnection();
 
-                    }
+                httpPost.setDoOutput(true);
+                httpPost.setChunkedStreamingMode(0);
 
-                    @Override
-                    public boolean usingProxy() {
-                        return false;
-                    }
+                OutputStream out = new BufferedOutputStream(httpPost.getOutputStream());
 
-                    @Override
-                    public void connect() throws IOException {
+                //TODO Do some upload
+                //writeStream(out);
 
-                    }
-                };
-            } catch (MalformedURLException e) {
+                InputStream in = new BufferedInputStream(httpPost.getInputStream());
+                //TODO Read the response
+                //readStream(in);
+            } catch (IOException e){
                 e.printStackTrace();
+            }
+            finally {
+                httpPost.disconnect();
             }
 
 
@@ -124,6 +129,7 @@ public class ImageUploadActivity extends AppCompatActivity implements View.OnCli
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
         }
     }
 
@@ -131,5 +137,5 @@ public class ImageUploadActivity extends AppCompatActivity implements View.OnCli
     private HttpURLConnection instead
     */
 
-    private class
+    //private class
 }
